@@ -1,0 +1,13 @@
+[theme]
+base="light"
+
+
+
+[server]
+headless = true
+port = 8502
+enableCORS = false
+
+
+[browser]
+serverPort = 8502
