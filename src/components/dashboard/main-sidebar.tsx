@@ -91,7 +91,7 @@ export function MainSidebar() {
                   <SidebarMenu>
                     {group.items.map((item) => (
                       <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton asChild isActive={item.isActive}>
+                        <SidebarMenuButton>
                           <Button
                             variant="ghost"
                             className={cn("w-full justify-start gap-2", item.isActive && "bg-accent")}
