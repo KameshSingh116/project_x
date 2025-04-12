@@ -19,6 +19,7 @@ export function Header() {
     <header className="bg-white shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
+          
           <Link href="/" className="text-2xl font-bold text-[#1a73e8]">
             GiftedBooks
           </Link>
