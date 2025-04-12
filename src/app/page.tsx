@@ -22,8 +22,7 @@ export default function Home() {
 
 
   return (
-    <div className="min-h-screen bg-[#f8faff]">
-      <Header />
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950">
       
 
   return (
@@ -49,27 +48,34 @@ export default function Home() {
             </motion.div>
 
             <motion.nav
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="hidden md:flex items-center gap-6"
-            >
-              {["Home", "Education", "Grievance", "Marketplace", "About Us", "Contact Us", "Dashboard"].map(
-                (item, i) => (
-                  <motion.div
-                    key={item}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * i, duration: 0.5 }}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                  >
-                    <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                      {item}
-                    </Link>
-                  </motion.div>
-                ),
-              )}
-            </motion.nav>
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.2, duration: 0.5 }}
+  className="hidden md:flex items-center gap-6"
+>
+  {[
+    { name: "Home", link: "/" },
+    { name: "Education", link: "/education" },
+    { name: "Grievance", link: "/grievance" },
+    { name: "Marketplace", link: "/marketplace" },
+    { name: "About Us", link: "/about" },
+    { name: "Contact Us", link: "/contact" },
+    { name: "Dashboard", link: "/dashboard" }
+  ].map((item, i) => (
+    <motion.div
+      key={item.name}
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.1 * i, duration: 0.5 }}
+      whileHover={{ scale: 1.05, y: -2 }}
+    >
+      <Link href={item.link} className="text-muted-foreground hover:text-foreground transition-colors">
+        {item.name}
+      </Link>
+    </motion.div>
+  ))}
+</motion.nav>
+
 
             <div className="flex items-center gap-4">
               <ThemeToggle />
