@@ -78,7 +78,7 @@ export function MainSidebar() {
           <div className="rounded-lg bg-primary/10 p-1">
             <FileCode2 className="h-6 w-6 text-primary" />
           </div>
-          <div className="font-semibold">CodeTracker</div>
+          <div className="font-semibold">TinkEdX</div>
         </div>
       </SidebarHeader>
       <ScrollArea className="flex-1">

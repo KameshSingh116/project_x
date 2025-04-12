@@ -1,30 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import Link from 'next/link'
-import { FaBook, FaClipboardList, FaHandsHelping } from 'react-icons/fa'
-
 import { BookOpen, Gift, ChevronRight, Sparkles, Scale, Heart, LogIn, Search } from "lucide-react"
-import { Header } from '@/components/Header'
-import { Hero } from '@/components/Hero'
-import { WhatWeOffer } from '@/components/WhatWeOffer'
-import { HowItWorks } from '@/components/HowItWorks'
-import { Footer } from '@/components/Footer'
 import { ThemeProvider } from "@/components/theme-provider"
 import ThemeToggle from "@/components/theme-toggle"
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false)
-
-
-  return (
-    <div className="min-h-screen bg-[#f8faff]">
-      <Header />
-      
 
   return (
     <ThemeProvider attribute="class" defaultTheme="light">
@@ -44,7 +29,7 @@ export default function Home() {
                 <Sparkles className="h-6 w-6 text-blue-500" />
               </motion.div>
               <Link href="/" className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                GiftedBooks
+              TinkEdX
               </Link>
             </motion.div>
 
@@ -54,21 +39,66 @@ export default function Home() {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="hidden md:flex items-center gap-6"
             >
-              {["Home", "Education", "Grievance", "Marketplace", "About Us", "Contact Us", "Dashboard"].map(
-                (item, i) => (
-                  <motion.div
-                    key={item}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * i, duration: 0.5 }}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                  >
-                    <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                      {item}
-                    </Link>
-                  </motion.div>
-                ),
-              )}
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, duration: 0.5 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+              >
+                <Link href="/education" className="text-white-800 hover:text-[#1a73e8]">
+                  Education
+                </Link>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+              >
+                <Link href="/grievance" className="text-white-800 hover:text-[#1a73e8]">
+                  Grievance
+                </Link>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+              >
+                <Link href="/marketplace" className="text-white-800 hover:text-[#1a73e8]">
+                  Marketplace
+                </Link>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+              >
+                <Link href="/about" className="text-white-800 hover:text-[#1a73e8]">
+                  About Us
+                </Link>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+              >
+                <Link href="/contact" className="text-white-800 hover:text-[#1a73e8]">
+                  Contact Us
+                </Link>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+              >
+                <Link href="/dashboard" className="text-white-800 hover:text-[#1a73e8]">
+                  Dashboard
+                </Link>
+              </motion.div>
             </motion.nav>
 
             <div className="flex items-center gap-4">
@@ -362,12 +392,6 @@ export default function Home() {
         </footer>
       </div>
     </ThemeProvider>
-  )
-
-
-
-
-    </div>
   )
 }
 
