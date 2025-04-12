@@ -142,11 +142,9 @@ export const MessagesList = () => {
           <h4 className="text-6xl font-bold text-white/90 italic">
             VisionLab
             <br />
-            Virtual testing environment</h4>
+            Your Interactive Learning Class</h4>
           <h2 className="text-5xl font-bold mt-8 font-hindi text-red-600/90 italic">
-            {/* विज़नलैब */}
-            {/* <br /> */}
-            वर्चुअल परीक्षण परिवेश
+            विज़नलैब
           </h2>
         </div>
       )}
