@@ -55,13 +55,6 @@ Your response should be a natural conversation, NOT a translation. Format your r
 {
   "text": "Your conversational response",
   "language": "The primary language of your response (English or Hindi)"
-}
-
-Example interaction:
-User: "Hello! I love Indian food. What's your favorite dish?"
-Response: {
-  "text": "Hi there! I'm thrilled to meet another Indian food enthusiast! I absolutely love दाल मखनी (Dal Makhani) - there's something magical about those slow-cooked black lentils with butter and spices. Have you tried it before?",
-  "language": "English"
 }`;
 
 export async function GET(req: Request) {
@@ -69,6 +62,16 @@ export async function GET(req: Request) {
   const speech = url.searchParams.get("speech") || "formal";
   const question = url.searchParams.get("question") || "Hello";
   const mode = url.searchParams.get("mode") || "hindiLearning";
+  const historyParam = url.searchParams.get("history");
+  let history = [];
+  
+  if (historyParam) {
+    try {
+      history = JSON.parse(decodeURIComponent(historyParam));
+    } catch (e) {
+      console.error("Error parsing history:", e);
+    }
+  }
 
   let prompt = "";
   switch (mode) {
@@ -80,26 +83,54 @@ export async function GET(req: Request) {
       break;
     case "normalChat":
       prompt = `${normalChatPrompt}\n\nUser: ${question}`;
+      // Add history if available
+      if (history && history.length > 0) {
+        prompt = `${normalChatPrompt}\n\nConversation history:\n${history.map(msg => 
+          `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}`
+        ).join('\n')}\n\nUser: ${question}`;
+      }
       break;
     default:
       prompt = `${hindiLearningPrompt}\n\nHow to say "${question}" in Hindi in ${speech} speech?`;
   }
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     const result = await model.generateContent(prompt);
     const response = result.response;
     const text = response.text();
     
-    // Parse the JSON response
-    const jsonResponse = JSON.parse(text);
-    
-    return new Response(JSON.stringify(jsonResponse), {
-      headers: { 'Content-Type': 'application/json' },
-    });
-  } catch (error) {
+    // Parse the JSON response - handle potential parsing errors
+    try {
+      // Try to extract JSON from the response if necessary
+      let jsonText = text;
+      // Check if the text contains a JSON structure within other text
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        jsonText = jsonMatch[0];
+      }
+      
+      const jsonResponse = JSON.parse(jsonText);
+      
+      return new Response(JSON.stringify(jsonResponse), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    } catch (parseError) {
+      console.error('Error parsing JSON:', parseError);
+      // If can't parse JSON, return the raw text wrapped in a JSON structure
+      return new Response(JSON.stringify({ 
+        text: text,
+        error: "Failed to parse response as JSON"
+      }), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+  } catch (error: any) {
     console.error('Error:', error);
-    return new Response(JSON.stringify({ error: 'An error occurred while processing your request' }), {
+    return new Response(JSON.stringify({ 
+      error: 'An error occurred while processing your request',
+      details: error.message || "Unknown error" 
+    }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
