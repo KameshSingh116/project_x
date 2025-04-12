@@ -9,7 +9,7 @@ import { AIAssistant } from '@/components/AIAssistant'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { BookOpen, Users, FileText, ClipboardList, Bot, Mic } from 'lucide-react'
 import Link from 'next/link'
-import FlashcardDeck from './flashcards' // Adjust the import path as necessary
+import FlashcardDeckComponent from './flashcards' // Adjust the import path as necessary
 
 export default function EducationPage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -204,3 +204,19 @@ export default function EducationPage() {
     </div>
   )
 }
+
+import React from 'react';
+
+interface FlashcardDeckComponentProps {
+  topic: string;
+}
+
+const FlashcardDeck: React.FC<FlashcardDeckComponentProps> = ({ topic }) => {
+  return (
+    <div>
+      {/* Your FlashcardDeck component implementation */}
+    </div>
+  );
+}
+
+export { FlashcardDeck };

@@ -2,13 +2,24 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const ClientPage = ({ videos }) => {
-  const [popupVideo, setPopupVideo] = useState(null);
-  const router = useRouter();
+interface Video {
+  url: string;
+  title?: string;
+  key?: string;
+  courseName?: string;
+}
+
+interface ClientPageProps {
+  videos: Video[];
+}
+
+const ClientPage: React.FC<ClientPageProps> = ({ videos }) => {
+  const [popupVideo, setPopupVideo] = useState<Video | null>(null);
+  // const router = useRouter();
 
   console.log("Client received videos:", videos);
 
-  const handleThumbnailClick = (video) => {
+  const handleThumbnailClick = (video: Video) => {
     setPopupVideo(video);
   };
   
@@ -17,7 +28,7 @@ const ClientPage = ({ videos }) => {
   };
 
   // Helper function to extract video ID safely
-  const extractVideoId = (video) => {
+  const extractVideoId = (video: Video) => {
     if (!video) return null;
     
     // Get the URL from video object or use video directly if it's a string
@@ -98,7 +109,7 @@ const ClientPage = ({ videos }) => {
               height="315"
               src={`https://www.youtube.com/embed/${extractVideoId(popupVideo)}`}
               title="YouTube video player"
-              frameBorder="0"
+              frameBorder={0}
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>

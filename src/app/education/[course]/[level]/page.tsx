@@ -24,7 +24,7 @@ export default async function Page({
     // Transform the data to include keys and handle nested structure
     videos = Object.entries(videoData).map(([key, value]) => {
       // If the value is an object with url property, return it with the key
-      if (typeof value === 'object' && value !== null && value.url) {
+      if (typeof value === 'object' && value !== null && (value as { url: string }).url) {
         return { ...value, key };
       } 
       // If it's an object but doesn't have url directly (nested structure)
