@@ -258,7 +258,7 @@ export default function Home() {
                     className="flex flex-col items-center text-center relative z-10"
                   >
                     <motion.div
-                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      whileHover={{ scale: 1.1, rotate: 360 }}
                       transition={{ type: "spring", stiffness: 400, damping: 10 }}
                       className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white text-2xl font-bold mb-6"
                     >
